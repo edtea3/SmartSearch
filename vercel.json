@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/translate.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/translate",
+      "dest": "/api/translate.py"
+    }
+  ]
+}
