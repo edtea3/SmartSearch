@@ -1,4 +1,5 @@
-run = "node src/test_connection.js"
+[agent]
+expertMode = true
 
-[languages]
-nodejs = true
+[nix]
+channel = "stable-25_05"
