@@ -1,5 +1,7 @@
-[agent]
-expertMode = true
+run = "node src/test_connection.js"
+
+[languages]
+nodejs = true
 
 [nix]
-channel = "stable-25_05"
+packages = ["nodejs_20"]
