@@ -2,21 +2,21 @@ from translate_service import smart_translate, detect_language, translate
 
 def test_detect():
     print("=== DETECT TESTS ===")
-    print("ru →", detect_language("Привет, Как дела?"))
-    print("sah →", detect_language(" буолла?"))
+    print("ru →", detect_language("Привет, Какие льготы я могу получить?"))
+    print("sah →", detect_language("Ханнык многодетнай льготалар баалларый уонна ону хантан ылабын?"))
 
 def test_translate():
     print("=== TRANSLATE TESTS ===")
-    print("sah→ru:", translate("Куорсун бэйэ", "ru"))
-    print("ru→sah:", translate("Привет! Как дела?", "sah"))
+    print("sah→ru:", translate("Привет, Какие льготы я могу получить?", "ru"))
+    print("ru→sah:", translate("Ханнык многодетнай льготалар баалларый уонна ону хантан ылабын?", "sah"))
 
 def test_smart():
     print("=== SMART TRANSLATE ===")
     print(
-        smart_translate("Куорсун бэйэ")
+        smart_translate("Ханнык многодетнай льготалар баалларый уонна ону хантан ылабын?")
     )
     print(
-        smart_translate("Привет, Как дела?")
+        smart_translate("Привет, Какие льготы я могу получить?")
     )
 
 
