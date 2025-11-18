@@ -1,2 +1,6 @@
 .replit
-src/main.py
+src/main.js
+src/db_manipulate
+bd.md
+package-lock.json
+package.json
