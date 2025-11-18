@@ -3,9 +3,11 @@ import path from "path";
 
 export async function benefitSearch(text) {
   return new Promise((resolve) => {
-    const pyPath = path.resolve("src/benefit_search.py");
+    const pyPath = path.resolve("src/python", "benefit_search.py");
 
-    const proc = spawn("python3", [pyPath, text]);
+    const proc = spawn("python3", [pyPath, text], {
+      env: process.env
+    });
 
     let output = "";
     let errorOutput = "";
@@ -18,22 +20,31 @@ export async function benefitSearch(text) {
       errorOutput += data.toString();
     });
 
-    proc.on("close", () => {
-      if (errorOutput) {
+    proc.on("close", (code) => {
+      // Если Python завершился ошибкой
+      if (code !== 0 || errorOutput.trim().length > 0) {
         return resolve({
           ok: false,
-          error: errorOutput
+          message: "Python error",
+          code,
+          error: errorOutput.trim()
         });
       }
 
+      // Попытка парсинга JSON
       try {
-        const json = JSON.parse(output);
-        return resolve(json);
-      } catch (e) {
+        const cleanOutput = output.trim();
+        const json = JSON.parse(cleanOutput);
+        return resolve({
+          ok: true,
+          data: json
+        });
+      } catch (err) {
         return resolve({
           ok: false,
-          error: "Invalid JSON from Python",
-          raw: output
+          message: "Invalid JSON from Python",
+          raw: output.trim(),
+          parseError: err.toString()
         });
       }
     });
